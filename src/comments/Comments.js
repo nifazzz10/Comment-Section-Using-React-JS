@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import CommentForm from "./CommentForm";
-import Comment from "./Comment";
-
+import Comment from "./Comment.jsx";
 import { Box } from "@mui/system";
 import { Grid, Typography } from "@mui/material";
 import {getComments as getCommentsApi, createComment as createCommentApi} from "../api";
