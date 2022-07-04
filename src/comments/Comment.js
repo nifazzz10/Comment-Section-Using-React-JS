@@ -17,9 +17,9 @@ import TreeItem from "@mui/lab/TreeItem";
 import { makeStyles} from "@material-ui/core/styles";
 import { Box } from "@mui/system";
 import React from "react";
-
+import { red } from "@mui/material/colors";
 import "../index.css";
-
+import  { useEffect, useState } from "react"
 function stringToColor(string) {
   let hash = 0;
   let i;
@@ -51,6 +51,14 @@ const useStyles = makeStyles({
     }
   }
 });
+const styles = () => ({
+  selected: {
+    "&:focus": {
+      backgroundColor: "aliceblue"
+    }
+  }
+});
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark",
   ...theme.typography.body2,
@@ -58,8 +66,25 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: "center",
   color: theme.palette.text.secondary,
 }));
+
 export default function Comment({ comment, replies, setActiveComment, activeComment,addComment,parentId = null,currentUserId,}){
 
+    // const [users, setUsers] = useState([])
+  
+    // const fetchData = () => {
+    //   fetch("https://jsonplaceholder.typicode.com/users")
+    //     .then(response => {
+    //       return response.json()
+    //     })
+    //     .then(data => {
+    //       setUsers(data)
+    //     })
+    // }
+  
+    // useEffect(() => {
+    //   fetchData()
+    // }, [])
+  
   const isReplying = activeComment && activeComment.id === comment.id && activeComment.type === "replying";
   const canReply = Boolean(currentUserId);
   const replyId = parentId ? parentId : comment.id;
@@ -92,7 +117,7 @@ export default function Comment({ comment, replies, setActiveComment, activeComm
                         {isReplying && ( 
                         <CommentForm submitLabel="Reply" hasCancelButton handleSubmit={(text) => addComment(text, replyId)} handleCancel={() => { setActiveComment(null);}} />)} 
                     </TimelineContent> } >
-                  <TreeItem className={classes}
+                  <TreeItem className={styles}
                     nodeId="2"
                     label={
                       <Timeline>
@@ -120,6 +145,6 @@ export default function Comment({ comment, replies, setActiveComment, activeComm
         </TreeView>
       </Box>
     </div>
-  );};  
+  );}; 
 
       
