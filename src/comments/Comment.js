@@ -14,9 +14,12 @@ import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import TreeView from "@mui/lab/TreeView";
 import TreeItem from "@mui/lab/TreeItem";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { makeStyles} from "@material-ui/core/styles";
 import { Box } from "@mui/system";
 import React from "react";
+import { red } from "@mui/material/colors";
+import "../index.css";
+import  { useEffect, useState } from "react"
 function stringToColor(string) {
   let hash = 0;
   let i;
@@ -48,6 +51,14 @@ const useStyles = makeStyles({
     }
   }
 });
+const styles = () => ({
+  selected: {
+    "&:focus": {
+      backgroundColor: "aliceblue"
+    }
+  }
+});
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark",
   ...theme.typography.body2,
@@ -55,7 +66,25 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: "center",
   color: theme.palette.text.secondary,
 }));
-const Comment = ({ comment, replies, setActiveComment, activeComment,updateComment,deleteComment,addComment,parentId = null,currentUserId,}) => {
+
+export default function Comment({ comment, replies, setActiveComment, activeComment,addComment,parentId = null,currentUserId,}){
+
+    // const [users, setUsers] = useState([])
+  
+    // const fetchData = () => {
+    //   fetch("https://jsonplaceholder.typicode.com/users")
+    //     .then(response => {
+    //       return response.json()
+    //     })
+    //     .then(data => {
+    //       setUsers(data)
+    //     })
+    // }
+  
+    // useEffect(() => {
+    //   fetchData()
+    // }, [])
+  
   const isReplying = activeComment && activeComment.id === comment.id && activeComment.type === "replying";
   const canReply = Boolean(currentUserId);
   const replyId = parentId ? parentId : comment.id;
@@ -64,7 +93,7 @@ const Comment = ({ comment, replies, setActiveComment, activeComment,updateComme
  return(
   <div>
       <Box>
-        <TreeView>
+        <TreeView  >
           <Timeline key={comment.id}>
             <TimelineItem>
               <TimelineSeparator>
@@ -80,15 +109,15 @@ const Comment = ({ comment, replies, setActiveComment, activeComment,updateComme
                   <Item variant="body2" sx={{fontSize:"10px"}}> {createdAt}</Item>
                 </Stack>
                  <Typography variant="body2" >{comment.body}</Typography>
-                <TreeItem
+                <TreeItem className={classes}
                   nodeId="1" label={
                   <TimelineContent>
                    {canReply && (<Chip label="Reply"  onClick={() =>  setActiveComment({  id: comment.id,  type: "replying",  }) } 
-                   sx={{fontSize:"10px",mb:1}} size="small" icon={<ReplyIcon />}/>  )}
+                   sx={{fontSize:"10px",mb:1}} size="small" icon={<ReplyIcon /> }/>  )}
                         {isReplying && ( 
                         <CommentForm submitLabel="Reply" hasCancelButton handleSubmit={(text) => addComment(text, replyId)} handleCancel={() => { setActiveComment(null);}} />)} 
                     </TimelineContent> } >
-                  <TreeItem
+                  <TreeItem className={styles}
                     nodeId="2"
                     label={
                       <Timeline>
@@ -116,5 +145,6 @@ const Comment = ({ comment, replies, setActiveComment, activeComment,updateComme
         </TreeView>
       </Box>
     </div>
-  );};  
-export default Comment;
+  );}; 
+
+      

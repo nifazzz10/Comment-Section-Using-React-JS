@@ -7,6 +7,7 @@ const App = () => {
         commentsUrl="http://localhost:3004/comments"
         currentUserId="1"
       />
+     
     </div>
   );
 };

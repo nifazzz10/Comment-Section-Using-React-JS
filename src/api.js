@@ -1,40 +1,24 @@
-import { fontSize } from "@mui/system";
+import backendComments from "./comments/Comments"
+import getData from "./comments/Comments"
 
-export const getComments = async () => {
-  return [
+export const getComments = async () => { try{
+  const response = await fetch('https://backcomments.s3.amazonaws.com/comments.json');
+  console.log('response  ', response)
+  return  [
     {
-      id: "1",
-      body: "First comment",
-      username: "nizzza",
-      userId: "1",
-      parentId: null,
-      createdAt: "2021-08-16T23:00:33.010+02:00",
+      id: response.data.id,
+      username:response.data.username,
+      userId:response.data.userId,
+      body:response.data.body,
+      parentId:response.data.parentId,
+      createdAt:response.data.createdAt,
     },
-    {
-      id: "2",
-      body: "Second comment",
-      username: "nifzza ",
-      userId: "2",
-      parentId: null,
-      createdAt: "2021-08-16T23:00:33.010+02:00",
-    },
-    {
-      id: "3",
-      body: "First comment first child",
-      username: "nizzz ",
-      userId: "2",
-      parentId: "1",
-      createdAt: "2021-08-16T23:00:33.010+02:00",
-    },
-    {
-      id: "4",
-      body: "Second comment second child",
-      username: "nifzzz ",
-      userId: "2",
-      parentId: "2",
-      createdAt: "2021-08-16T23:00:33.010+02:00",
-    },
-  ];
+
+  ];;
+}catch(error) {
+  return [];
+}
+
 };
 
 export const createComment = async (text, parentId = null) => {
