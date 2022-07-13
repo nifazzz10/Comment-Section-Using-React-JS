@@ -14,6 +14,9 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";import { convertFromHT
 import { convertToRaw } from 'draft-js'
 import { EditorState} from "draft-js";
 import { draftToMarkdown } from "markdown-draft-js";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.bubble.css';
+import RichTextEditor from "./quill";
 const CommentForm = ({
   handleSubmit,submitLabel,hasCancelButton = false, handleCancel,initialText = "",
 }) => {
@@ -59,6 +62,10 @@ const myTheme = createTheme({
   }
 })
 
+  const [value, setValue] = useState('');
+
+
+
   return (
     <div>  
 
@@ -68,14 +75,15 @@ const myTheme = createTheme({
 
       <Box>
       <form onSubmit={onSubmit}>   
-     
+      {/* <ReactQuill theme="bubble" value={value} onChange={setValue}/> */}
       <ThemeProvider theme={myTheme}>
-    <MUIRichTextEditor
+    {/* <MUIRichTextEditor
       label="Type something here..."
       onChange={handleChange}
       defaultValue={content}
       inlineToolbar={true}
-    />
+    /> */}
+          <RichTextEditor placeholder="some fun text" />
   </ThemeProvider>
   {/* <TextareaAutosize  
          style = {{width: "99.5%",borderRadius:"8px",backgroundColor:"#edf2f4"}}
@@ -93,6 +101,6 @@ const myTheme = createTheme({
       </div>
 
   );
-};
 
+};
 export default CommentForm;

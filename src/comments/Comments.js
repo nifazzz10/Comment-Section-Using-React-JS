@@ -44,8 +44,8 @@ console.log(backendComments);
 }).catch(err => console.error(err));
 
 var AWS = require('aws-sdk');
-AWS.config.update({ region: 'us-east-1' ,  accessKeyId: 'AKIAWL27HAFT6QJ6FFJR',
-secretAccessKey: '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'});
+AWS.config.update({ region: 'us-east-1' ,  accessKeyId: 's',
+secretAccessKey: 'n'});
 var s3 = new AWS.S3();
 var buf = Buffer.from(JSON.stringify(backendComments));
   var datas = {
