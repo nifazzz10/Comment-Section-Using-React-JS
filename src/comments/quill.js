@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "react-quill/dist/quill.bubble.css";
-
+import "../index.css"
 class RichTextEditor extends Component {
   constructor(props) {
     super(props);
@@ -54,6 +54,7 @@ class RichTextEditor extends Component {
           formats={this.formats}
           onChange={this.rteChange}
           value={this.state.comments || ""}
+          
         />
       </div>
     );
