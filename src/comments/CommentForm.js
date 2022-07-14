@@ -83,7 +83,10 @@ const myTheme = createTheme({
       defaultValue={content}
       inlineToolbar={true}
     /> */}
-          <RichTextEditor placeholder="some fun text" />
+    <ReactQuill theme="bubble"  onChange={setText}
+      defaultValue={text}/>
+          {/* <RichTextEditor placeholder="some fun text"   onChange={handleChange}
+      defaultValue={content} /> */}
   </ThemeProvider>
   {/* <TextareaAutosize  
          style = {{width: "99.5%",borderRadius:"8px",backgroundColor:"#edf2f4"}}

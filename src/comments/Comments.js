@@ -8,7 +8,7 @@ import { EditorState} from "draft-js";
 import { draftToMarkdown } from "markdown-draft-js";
 import { markdownToDraft } from 'markdown-draft-js';
 import ReactMarkdown from "react-markdown";
-
+import "../config"
 const Comments = ({ commentsUrl, currentUserId }) => {
 
   const [backendComments, setBackendComments] = useState([]);
@@ -44,8 +44,8 @@ console.log(backendComments);
 }).catch(err => console.error(err));
 
 var AWS = require('aws-sdk');
-AWS.config.update({ region: 'us-east-1' ,  accessKeyId: 's',
-secretAccessKey: 'n'});
+AWS.config.update({ region: 'us-east-1' ,  accessKeyId:"l",
+secretAccessKey:"l"});
 var s3 = new AWS.S3();
 var buf = Buffer.from(JSON.stringify(backendComments));
   var datas = {
