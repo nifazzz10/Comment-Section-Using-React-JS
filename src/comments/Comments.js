@@ -4,14 +4,20 @@ import Comment from "./Comment";
 import { Box } from "@mui/system";
 import { Grid, Typography } from "@mui/material";
 import {getComments as getCommentsApi, createComment as createCommentApi} from "../api";
+import { EditorState} from "draft-js";
+import { draftToMarkdown } from "markdown-draft-js";
+import { markdownToDraft } from 'markdown-draft-js';
+import ReactMarkdown from "react-markdown";
+import "../config"
 const Comments = ({ commentsUrl, currentUserId }) => {
+
   const [backendComments, setBackendComments] = useState([]);
   const [activeComment, setActiveComment] = useState(null);
   const rootComments = backendComments.filter(
     (backendComment) => backendComment.parentId === null
   );
   const getReplies = (commentId) =>
-    backendComments
+   backendComments
       .filter((backendComment) => backendComment.parentId === commentId)
       .sort(
         (a, b) =>
@@ -26,22 +32,23 @@ const Comments = ({ commentsUrl, currentUserId }) => {
 console.log(backendComments);
   useEffect(() => {
     getCommentsApi().then((data) => {
-      setBackendComments(data);
+      setBackendComments((data));
     });
   }, []);
-//   fetch('https://backcomments.s3.amazonaws.com/comments.json')
-//   .then(result => result.json())
-//   .then((output) => {
-//       console.log('Output: ', output);
+ 
+  fetch('https://backcomments.s3.amazonaws.com/comments.json')
+  .then(result => result.json())
+  .then((output) => {
+      console.log('Output: ', output);
       
-// }).catch(err => console.error(err));
-var AWS = require('aws-sdk');
-AWS.config.update({ region: 'us-east-1' ,  accessKeyId: 'your access id',
-secretAccessKey: 'your secret key'});
-var s3 = new AWS.S3();
+}).catch(err => console.error(err));
 
+var AWS = require('aws-sdk');
+AWS.config.update({ region: 'us-east-1' ,  accessKeyId:"l",
+secretAccessKey:"l"});
+var s3 = new AWS.S3();
 var buf = Buffer.from(JSON.stringify(backendComments));
-  var data = {
+  var datas = {
     Bucket: 'backcomments',
     Key: 'comments.json',
     Body: buf,
@@ -50,7 +57,7 @@ var buf = Buffer.from(JSON.stringify(backendComments));
     ACL: 'public-read'
 };
 
-s3.putObject(data, function (err, data) {
+s3.putObject(datas, function (err, datas) {
     if (err) {
         console.log(err);
         console.log('Error uploading data: ');
@@ -83,6 +90,7 @@ s3.putObject(data, function (err, data) {
   return (
     <div >
      <Box>
+    
      <Grid container spacing={1}><Grid item xs>
       <Typography variant="h6" sx={{fontWeight:"bold"}} gutterBottom component="div">
        Comment Section

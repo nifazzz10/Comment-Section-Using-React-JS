@@ -6,12 +6,12 @@ export const getComments = async () => { try{
   console.log('response  ', response)
   return  [
     {
-      id: response.data.id,
-      username:response.data.username,
-      userId:response.data.userId,
-      body:response.data.body,
-      parentId:response.data.parentId,
-      createdAt:response.data.createdAt,
+      id: 1,
+      username:"nfeg",
+      userId:1,
+      body:"whame",
+      parentId:null,
+   createdAt:    new Date().toISOString()
     },
 
   ];;

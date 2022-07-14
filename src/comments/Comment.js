@@ -20,6 +20,8 @@ import React from "react";
 import { red } from "@mui/material/colors";
 import "../index.css";
 import  { useEffect, useState } from "react"
+import ReactMarkdown from "react-markdown";
+import rehypeRaw from 'rehype-raw'
 function stringToColor(string) {
   let hash = 0;
   let i;
@@ -108,7 +110,10 @@ export default function Comment({ comment, replies, setActiveComment, activeComm
                   </Typography>
                   <Item variant="body2" sx={{fontSize:"10px"}}> {createdAt}</Item>
                 </Stack>
-                 <Typography variant="body2" >{comment.body}</Typography>
+             
+      <ReactMarkdown children={comment.body} />
+    
+                 {/* <Typography variant="body2" >{comment.body}</Typography> */}
                 <TreeItem className={classes}
                   nodeId="1" label={
                   <TimelineContent>
