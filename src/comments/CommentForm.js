@@ -16,7 +16,8 @@ import { EditorState} from "draft-js";
 import { draftToMarkdown } from "markdown-draft-js";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.bubble.css';
-import RichTextEditor from "./quill";
+// import RichTextEditor from "./quill";
+import EditorToolbar, { modules, formats } from "./quill";
 const CommentForm = ({
   handleSubmit,submitLabel,hasCancelButton = false, handleCancel,initialText = "",
 }) => {
@@ -76,7 +77,7 @@ const myTheme = createTheme({
       <Box>
       <form onSubmit={onSubmit}>   
       {/* <ReactQuill theme="bubble" value={value} onChange={setValue}/> */}
-      <ThemeProvider theme={myTheme}>
+      {/* <ThemeProvider theme={myTheme}> */}
     {/* <MUIRichTextEditor
       label="Type something here..."
       onChange={handleChange}
@@ -85,9 +86,18 @@ const myTheme = createTheme({
     /> */}
     {/* <ReactQuill theme="bubble"  onChange={setText}
       defaultValue={text}/> */}
-          <RichTextEditor placeholder="some fun text"   onChange={setText}
-      defaultValue={text} />
-  </ThemeProvider>
+          {/* <RichTextEditor placeholder="some fun text"   onChange={setText}
+      defaultValue={text} /> */}
+        <EditorToolbar /> <ReactQuill
+        theme="bubble"
+        onChange={setText}
+        defaultValue={text} 
+        // readOnly={true}
+        placeholder={"Write something awesome..."}
+        modules={modules}
+        formats={formats}
+      />
+  {/* </ThemeProvider> */}
   {/* <TextareaAutosize  
          style = {{width: "99.5%",borderRadius:"8px",backgroundColor:"#edf2f4"}}
           placeholder="Type your comment here..."
