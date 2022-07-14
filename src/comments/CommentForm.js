@@ -91,6 +91,7 @@ const myTheme = createTheme({
         <EditorToolbar /> <ReactQuill
         theme="bubble"
         onChange={setText}
+        
         defaultValue={text} 
         // readOnly={true}
         placeholder={"Write something awesome..."}

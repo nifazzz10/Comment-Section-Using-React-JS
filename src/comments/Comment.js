@@ -88,6 +88,7 @@ export default function Comment({ comment, replies, setActiveComment, activeComm
     //   fetchData()
     // }, [])
   
+// const ReactMarkdown = require("react-markdown/with-html");
   const isReplying = activeComment && activeComment.id === comment.id && activeComment.type === "replying";
   const canReply = Boolean(currentUserId);
   const replyId = parentId ? parentId : comment.id;
@@ -111,8 +112,10 @@ export default function Comment({ comment, replies, setActiveComment, activeComm
                   </Typography>
                   <Item variant="body2" sx={{fontSize:"10px"}}> {createdAt}</Item>
                 </Stack>
-             
-      <ReactMarkdown children={comment.body} />
+                {/* <div className="ql-editor" style={{ padding: 0 }}>
+        <ReactMarkdown escapeHtml={false} source={quilGeneratedHtml} children={comment.body} />
+  </div> */}
+      <ReactMarkdown   children={comment.body} rehypePlugins={[rehypeRaw]} />
     
                  {/* <Typography variant="body2" >{comment.body}</Typography> */}
                 <TreeItem className={classes}
