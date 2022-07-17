@@ -1,5 +1,4 @@
-import backendComments from "./comments/Comments"
-import getData from "./comments/Comments"
+
 
 export const getComments = async () => { try{
   const response = await fetch('https://backcomments.s3.amazonaws.com/comments.json');

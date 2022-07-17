@@ -15,14 +15,11 @@
 .node.expanded > .childrenWrapper > .children {
     transform: translateY(0);
 }
-.wrapper{
-    border: 2px solid rgb(205, 205, 205);
-    border-radius: 8px;
-  }
+
   
   .editor{
   
-    background-color: rgb(201, 201, 201);
+    background-color: rgb(255, 255, 255);
     border-radius: 8px;
   }
   
@@ -30,7 +27,7 @@
      border-radius: 10px;
   }
   body {
-    background: #f3f1f2;
+    background: #ffffff;
     font-family: sans-serif;
   }
   
@@ -44,18 +41,9 @@
     background: #fefcfc;
   }
   
-  /* Snow Theme */
-   .ql-snow.ql-toolbar {
-    display: block;
-    background: #eaecec;
-    border-top-left-radius: 0.5em;
-    border-top-right-radius: 0.5em;
-  }
-  
-  /* Bubble Theme */
    .ql-bubble .ql-editor {
-    border: 1px solid #ccc;
-    border-radius: 1px;
+    border: 1px solid rgb(179, 176, 176);
+    border-radius: 6px;
   }
   
    .ql-editor {
@@ -63,7 +51,3 @@
     min-height: 11em;
   }
   
-  .themeSwitcher {
-    margin-top: 0.5em;
-    font-size: small;
-  }
