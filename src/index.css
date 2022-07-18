@@ -1,0 +1,53 @@
+.node > .childrenWrapper {
+    height:0px;
+    transition:height .5s;
+   
+    overflow: hidden;
+    padding-left: 10px;
+}
+.node > .childrenWrapper > .children {
+    transform: translateY(-100%);
+    transition: transform .5s ease;
+}
+.node.expanded > .childrenWrapper {
+    height:auto;
+}
+.node.expanded > .childrenWrapper > .children {
+    transform: translateY(0);
+}
+
+  
+  .editor{
+  
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+  }
+  
+  .toolbar{
+     border-radius: 10px;
+  }
+  body {
+    background: #ffffff;
+    font-family: sans-serif;
+  }
+  
+  .comment {
+    margin: 1rem 4rem;
+  }
+  
+   .ql-container {
+    border-bottom-left-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+    background: #fefcfc;
+  }
+  
+   .ql-bubble .ql-editor {
+    border: 1px solid rgb(179, 176, 176);
+    border-radius: 6px;
+  }
+  
+   .ql-editor {
+   margin-bottom: 1%;
+    min-height: 11em;
+  }
+  

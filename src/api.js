@@ -1,17 +1,16 @@
-import backendComments from "./comments/Comments"
-import getData from "./comments/Comments"
+
 
 export const getComments = async () => { try{
   const response = await fetch('https://backcomments.s3.amazonaws.com/comments.json');
   console.log('response  ', response)
   return  [
     {
-      id: response.data.id,
-      username:response.data.username,
-      userId:response.data.userId,
-      body:response.data.body,
-      parentId:response.data.parentId,
-      createdAt:response.data.createdAt,
+      id: 1,
+      username:"nfeg",
+      userId:1,
+      body:"whame",
+      parentId:null,
+   createdAt:    new Date().toISOString()
     },
 
   ];;
