@@ -32,7 +32,8 @@
     "react-scripts": "4.0.1",
     "rehype-raw": "^6.1.1",
     "styled-components": "^5.3.5",
-    "suneditor-react": "^3.4.0",
+    "suneditor": "^2.43.14",
+    "suneditor-react": "^3.4.1",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
