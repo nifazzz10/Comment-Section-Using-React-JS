@@ -7,6 +7,8 @@ import "../index.css"
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.bubble.css';
 import 'react-quill/dist/quill.snow.css'; 
+import SunEditor from "suneditor-react";
+import "suneditor/dist/css/suneditor.min.css";
 
 // import EditorToolbar, { modules, formats } from "./quill";
 const CommentForm = ({
@@ -26,15 +28,33 @@ const CommentForm = ({
       <Box>
       <form onSubmit={onSubmit}>   
       {/* <EditorToolbar  /> */}
-
-        <ReactQuill
-        theme="bubble"
-        onChange={setText}      
+      <SunEditor
+        // setContents="My contents"
+        showToolbar={true}
+  
+       onChange={setText}      
         defaultValue={text} 
-        placeholder={"Write something awesome..."}
-        // modules={modules}
-        // formats={formats}
-      /> 
+        setDefaultStyle="height: auto"
+        setOptions={{
+          showPathLabel: false,
+          buttonList: [
+            [
+              "bold",
+              "underline",
+              "italic",
+              "strike",
+              "list",
+              "align",
+              "fontSize",
+              "formatBlock",
+              "table",
+              "image","fontColor", "hiliteColor"
+            ]
+          ]
+       
+        }}
+      />
+      
           <Stack  direction="row" spacing={1}>
         <Button type="submit" variant="contained"     endIcon={<SendIcon />} > {submitLabel} </Button>
         {hasCancelButton && (
