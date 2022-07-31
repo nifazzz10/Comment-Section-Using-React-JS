@@ -1,85 +1,48 @@
-
 import React from "react";
-import { Quill } from "react-quill";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
+import TreeView from "@material-ui/lab/TreeView";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import TreeItem from "@material-ui/lab/TreeItem";
 
-const Size = Quill.import("formats/size");
-Size.whitelist = ["extra-small", "small", "medium", "large"];
-Quill.register(Size, true);
-
-export const modules = {
-  toolbar: {
-    container: "#toolbar",
- 
-  },
-  history: {
-    delay: 500,
-    maxStack: 100,
-    userOnly: true
+const useStyles = makeStyles({
+  root: {
+    height: 240,
+    flexGrow: 1,
+    maxWidth: 400
   }
-};
-export const formats = [
-  "header",
-  "size",
-  "bold",
-  "italic",
-  "underline",
-  "align",
-  "strike",
-  "script",
-  "blockquote",
-  "background",
-  "list",
-  "bullet",
-  "indent",
-  "link",
-  "image",
-  "color",
-  "code-block"
-];
+});
 
+export default function FileSystemNavigator() {
+  const classes = useStyles();
 
-export const QuillToolbar = () => (
-  <div id="toolbar">
-    <span className="ql-formats">
-      <select className="ql-header" defaultValue="3">
-        <option value="1">Heading</option>
-        <option value="2">Subheading</option>
-        <option value="3">Normal</option>
-      </select>
-    </span>
-    <span className="ql-formats">
-      <button className="ql-bold" />
-      <button className="ql-italic" />
-      <button className="ql-underline" />
-      <button className="ql-strike" />
-    </span>
-    <span className="ql-formats">
-      <button className="ql-list" value="ordered" />
-      <button className="ql-list" value="bullet" />
+  const StyledTreeItem = withStyles({
+    label: {
+      backgroundColor: "green",
+      color: "red"
+    },
+    root: {
+      "&.Mui-selected > .MuiTreeItem-content": {
+        backgroundColor: "red"
+      }
+    }
+  })(TreeItem);
 
-    </span>
-    <span className="ql-formats">
-      <button className="ql-script" value="super" />
-      <button className="ql-script" value="sub" />
-      <button className="ql-blockquote" />
-   
-    </span>
-    <span className="ql-formats">
-      <select className="ql-align" />
-      <select className="ql-color" />
-      <select className="ql-background" />
-    </span>
-    <span className="ql-formats">
-      <button className="ql-link" />
-      <button className="ql-image" />
-      <button className="ql-video" />
-    </span>
-    <span className="ql-formats">
-  
-      <button className="ql-code-block" />
-      <button className="ql-clean" />
-    </span>
-  </div>
-);
-
-export default QuillToolbar;
+  return (
+    <TreeView
+      className={classes.root}
+      defaultCollapseIcon={<ExpandMoreIcon />}
+      defaultExpandIcon={<ChevronRightIcon />}
+    >
+      <TreeItem nodeId="1" label="Applications">
+        <TreeItem nodeId="2" label="Calendar" />
+        <StyledTreeItem nodeId="3" label="Chrome" />
+        <StyledTreeItem
+          nodeId="4"
+          label="Webstorm"
+          icon={<ChevronRightIcon />}
+        />
+      </TreeItem>
+    </TreeView>
+  );
+}

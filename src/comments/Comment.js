@@ -12,13 +12,26 @@ import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-import TreeView from "@mui/lab/TreeView";
-import TreeItem from "@mui/lab/TreeItem";
 import { Box } from "@mui/system";
 import React from "react";
-import "../index.css";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from 'rehype-raw'
+import { makeStyles, withStyles } from "@material-ui/core/styles";
+import TreeView from "@material-ui/lab/TreeView";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import TreeItem from "@material-ui/lab/TreeItem";
+const useStyles = makeStyles({
+  root: {
+    flexGrow: 1,
+  
+  },
+  label: {
+    backgroundColor: "white",
+
+  },
+ 
+});
 function stringToColor(string) {
   let hash = 0;
   let i;
@@ -54,43 +67,60 @@ export default function Comment({ comment, replies, setActiveComment, activeComm
   const canReply = Boolean(currentUserId);
   const replyId = parentId ? parentId : comment.id;
   const createdAt = new Date(comment.createdAt).toLocaleTimeString();
-
+  const classes = useStyles();
+  const StyledTreeItem = withStyles({
+    label: {
+      backgroundColor: "white",
+   
+    },
+    root: {
+      "&.MuiTreeItem-root.Mui-selected > .MuiTreeItem-content .MuiTreeItem-label": {
+      backgroundColor: "white"
+    },
+    "&.MuiTreeItem-root.Mui-selected > .MuiTreeItem-content .MuiTreeItem-label:hover, .MuiTreeItem-root.Mui-selected:focus > .MuiTreeItem-content .MuiTreeItem-label": {
+      backgroundColor: "white"
+    }
+    }
+  })(TreeItem);
+ 
  return(
-  <div>
+  <>
+      
       <Box>
-        <TreeView  >
+        <TreeView   className={classes.root}  defaultCollapseIcon={<ExpandMoreIcon />}
+      defaultExpandIcon={<ChevronRightIcon />} >
           <Timeline key={comment.id}>
             <TimelineItem>
-              <TimelineSeparator>
-                <Avatar  {...stringAvatar(comment.username) }  />{" "}
+              <TimelineSeparator  sx={{paddingTop:"8px"}} >
+                <Avatar  {...stringAvatar(comment.username) }/>{" "}
                 <TimelineConnector />
               </TimelineSeparator>
-              <TimelineOppositeContent style={{maxWidth: "1px",paddingLeft: "0px",paddingRight: "0px", }}/>
+              <TimelineOppositeContent style={{maxWidth: "1px",padding:"0px"}}/>
               <TimelineContent>
-                <Stack direction="row" spacing={1}>
-                  <Typography variant="h6" sx={{fontSize:"15px" ,fontWeight:"bold"}}>
-                    {comment.username.charAt(0).toUpperCase() + comment.username.slice(1)}
+                <Stack direction="row" spacing={0}>
+                  <Typography  variant="span" >
+                 
                   </Typography>
-                  <Item variant="span" sx={{fontSize:"10px"}}> {createdAt}</Item>
+                  <Item variant="span" sx={{fontSize:"15px",fontWeight:"bold",color:"black"}}>    {comment.username.charAt(0).toUpperCase() + comment.username.slice(1)}</Item>
+                  <Item variant="span" sx={{fontSize:"10px",paddingTop:"13px"}}> {createdAt}</Item>
                 </Stack>
-         
-      <ReactMarkdown   children={comment.body} rehypePlugins={[rehypeRaw]} />
-    
-               
-                <TreeItem 
-                  nodeId="1" label={
+                <ReactMarkdown className="markdown" children={comment.body} rehypePlugins={[rehypeRaw]} />
+                
+             <StyledTreeItem 
+             
+                  nodeId="1"      label={
                   <TimelineContent>
                    {canReply && (<Chip label="Reply"  onClick={() =>  setActiveComment({  id: comment.id,  type: "replying",  }) } 
-                   sx={{fontSize:"10px",mb:1}} size="small" icon={<ReplyIcon /> }/>  )}
+                   sx={{fontSize:"10px",mb:1,mt:1}} size="small" icon={<ReplyIcon /> }/>  )}
                         {isReplying && ( 
                         <CommentForm submitLabel="Reply" hasCancelButton handleSubmit={(text) => addComment(text, replyId)} handleCancel={() => { setActiveComment(null);}} />)} 
-                    </TimelineContent> } >
-                  <TreeItem 
-                    nodeId="2"
+                    </TimelineContent> }>
+                  <StyledTreeItem 
+                    nodeId="2"       
                     label={
                       <Timeline>
                         {replies.length > 0 && (
-                          <div>
+                          <>
                             {replies.map((reply) => (
                               <Comment
                                 comment={reply}
@@ -103,16 +133,21 @@ export default function Comment({ comment, replies, setActiveComment, activeComm
                                 currentUserId={currentUserId}
                               />
                             ))}
-                          </div>
+                          </>
                         )}
                       </Timeline>}/>
-                </TreeItem>
+                    
+    
+                </StyledTreeItem>
               </TimelineContent>
+              
             </TimelineItem>
+            
           </Timeline>
         </TreeView>
+      
       </Box>
-    </div>
+    </>
   );}; 
 
       
