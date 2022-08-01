@@ -21,12 +21,7 @@ const CommentForm = ({
     handleSubmit(text);
     setText("");
   };
-  const [state, setState] = React.useState({
-    right: false,
-  });
-
-
-
+  
   return (
     <div>
       <Box>
